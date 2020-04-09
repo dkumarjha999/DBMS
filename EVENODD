@@ -1,0 +1,64 @@
+DELIMITER #
+ CREATE PROCEDURE EVNODD(N INT)
+ BEGIN
+     DECLARE CNT INT;
+     
+     CREATE TABLE EVEN(EVENSERIES INT);
+     CREATE TABLE ODD(ODDSERIES INT);
+     SET CNT=0;
+
+     
+     
+     WHILE CNT<N+1
+     DO
+     IF(CNT%2=0) THEN
+     INSERT INTO EVEN VALUES(CNT);
+     ELSE
+     INSERT INTO ODD VALUES(CNT);
+     END IF;
+     SET CNT=CNT+1;
+     END WHILE;
+    SELECT * FROM EVEN;
+       SELECT * FROM ODD;
+     DROP TABLE EVEN;
+     DROP TABLE ODD;
+    END #
+
+
++------------+
+| EVENSERIES |
++------------+
+|          0 |
+|          2 |
+|          4 |
+|          6 |
+|          8 |
+|         10 |
+|         12 |
+|         14 |
+|         16 |
+|         18 |
+|         20 |
++------------+
+11 rows in set (2.45 sec)
+
++-----------+
+| ODDSERIES |
++-----------+
+|         1 |
+|         3 |
+|         5 |
+|         7 |
+|         9 |
+|        11 |
+|        13 |
+|        15 |
+|        17 |
+|        19 |
++-----------+
+10 rows in set (2.45 sec)
+
+Query OK, 0 rows affected (2.74 sec)
+
+mysql> 
+

@@ -1,0 +1,47 @@
+mysql> DELIMITER #
+mysql>  CREATE PROCEDURE FIB(N INT)
+    ->  BEGIN
+    ->      DECLARE A INT;
+    ->      DECLARE B INT;
+    ->      DECLARE C INT;
+    ->      DECLARE CNT INT;
+    ->      
+    ->      CREATE TABLE TEMP(SERIES INT);
+    ->      SET A=0,B=1,C=0,CNT=0;
+    -> 
+    ->      INSERT INTO TEMP VALUES(A);
+    ->      INSERT INTO TEMP VALUES(B);
+    ->      WHILE CNT<N-2
+    ->      DO
+    ->      SET C=A+B;
+    ->      SET A=B;
+    ->     SET B=C;
+    ->      INSERT INTO TEMP VALUES(C);
+    ->      SET CNT=CNT+1;
+    ->      END WHILE;
+    ->     SELECT * FROM TEMP;
+    ->      DROP TABLE TEMP;
+    ->     END #
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CALL FIB(10);
+    -> #
++--------+
+| SERIES |
++--------+
+|      0 |
+|      1 |
+|      1 |
+|      2 |
+|      3 |
+|      5 |
+|      8 |
+|     13 |
+|     21 |
+|     34 |
++--------+
+10 rows in set (0.94 sec)
+
+Query OK, 0 rows affected (1.08 sec)
+
+
